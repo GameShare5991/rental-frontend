@@ -1,4 +1,5 @@
 # Rentals micro-frontend
+## URL: http://localhost:3006/?name=NAMEHERE
 ```
 docker build -t rental-frontend .
 
