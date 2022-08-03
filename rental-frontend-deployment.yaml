@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rentalfrontend-deployment
+  labels:
+    app: rental-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rental-frontend
+  template:
+    metadata:
+      labels:
+        app: rental-frontend
+    spec:
+      containers:
+        - name: rental-frontend
+          image: jackjackzhou/rental-frontend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rental-frontend-servies
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 3006
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: rental-frontend
